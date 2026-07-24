@@ -1,5 +1,7 @@
 # @scala-ai/agent-definitions
 
+![License](https://img.shields.io/badge/license-Apache%202.0-blue) ![Verticals](https://img.shields.io/badge/verticals-20-green) ![Tools](https://img.shields.io/badge/tools-79-orange)
+
 **Open-source AI agent definitions for 20 business verticals.**
 
 Define what your AI agent can do — bookings, CRM, inventory, reviews, and more — using a standard schema compatible with OpenAI, Groq, Mistral, Anthropic, and any LLM that supports function calling.
@@ -33,6 +35,18 @@ No dependencies. Reads JSON files from disk.
 ---
 
 ## Quick Start
+
+### Run the example in 2 minutes
+
+```bash
+git clone https://github.com/Alessandro114/scala-agent-definitions
+cd scala-agent-definitions
+export GROQ_API_KEY=your_key_here   # free at console.groq.com
+node examples/node-restaurant-agent.js
+# → Booking confirmed for 4 guests at 20:30
+```
+
+---
 
 ### 10-line restaurant booking agent
 
@@ -203,9 +217,41 @@ Visit [get-scala.com](https://get-scala.com) — 14-day free trial, no credit ca
 
 ---
 
+## Why Not LangChain / CrewAI / AutoGen?
+
+| | @scala-ai/agent-definitions | LangChain | CrewAI | AutoGen |
+|---|---|---|---|---|
+| **Scope** | Vertical-specific (restaurants, beauty, real estate, …) | Generic framework | Generic multi-agent | Generic multi-agent |
+| **Tool schema** | Pre-built, production-tested per vertical | Build your own | Build your own | Build your own |
+| **Risk levels** | Built-in (`low` / `medium` / `high` / `critical`) | Manual | Manual | Manual |
+| **Autonomy model** | 4 levels included | Not provided | Not provided | Not provided |
+| **Proactive behaviors** | Defined per vertical | Not provided | Not provided | Not provided |
+| **Dependencies** | Zero | Heavy | Heavy | Heavy |
+| **Format** | OpenAI-compatible JSON | Python-first | Python-first | Python-first |
+
+Use this package when you know the vertical upfront and want battle-tested tool definitions out of the box. Use LangChain/CrewAI/AutoGen when you need a generic orchestration framework.
+
+---
+
+## Examples
+
+| File | What it shows |
+|------|---------------|
+| [`examples/node-restaurant-agent.js`](examples/node-restaurant-agent.js) | Full Node.js agent: load schema, call Groq, handle tool_call, confirm booking |
+| [`examples/python-beauty-agent.py`](examples/python-beauty-agent.py) | Same flow in Python for BeautyOS appointment booking |
+| [`examples/curl-quick-test.sh`](examples/curl-quick-test.sh) | One-liner curl test to verify tool calling works with your API key |
+
+---
+
+## Built With
+
+These definitions power [SCALA AI OS](https://get-scala.com) — the agentic AI platform for business.
+
+---
+
 ## Contributing
 
-Tool definitions, new verticals, and translations are welcome. Open a PR against `definitions/`.
+Tool definitions, new verticals, and translations are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the JSON schema and PR process.
 
 The handler implementations (what happens when a tool is called) are proprietary and not part of this package. This is by design: the _interface_ is open, the _engine_ is SCALA's.
 
