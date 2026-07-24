@@ -1,0 +1,63 @@
+{
+  "vertical": "dermaly",
+  "agent_name": "DermalyOS Agent",
+  "agent_identity": "Your Clinical Assistant AI. Books visits, collects consent, follows up post-treatment.",
+  "description": "AI agent for dermatologists and aesthetic medicine clinics — consultations, treatments, pricing, patient management",
+  "tools": [
+    {
+      "name": "book_consultation",
+      "description": "Book a medical or aesthetic consultation",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "treatment_interest": { "type": "string", "required": false, "description": "Treatment or concern the patient is interested in" },
+        "preferred_date": { "type": "string", "required": true, "description": "Preferred date (YYYY-MM-DD)" },
+        "preferred_time": { "type": "string", "required": false, "description": "Preferred time (HH:MM)" },
+        "name": { "type": "string", "required": true, "description": "Patient name" },
+        "phone": { "type": "string", "required": false, "description": "Patient phone number" }
+      }
+    },
+    {
+      "name": "get_treatments",
+      "description": "List available medical-aesthetic treatments",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "area": { "type": "string", "required": false, "description": "Body area or concern (face, body, hair, etc.)" }
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check doctor's calendar availability for a given date",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "date": { "type": "string", "required": true, "description": "Date to check (YYYY-MM-DD)" },
+        "time": { "type": "string", "required": false, "description": "Time to check (HH:MM)" },
+        "treatment_type": { "type": "string", "required": false, "description": "Type of treatment or visit" }
+      }
+    },
+    {
+      "name": "get_price_list",
+      "description": "Get pricing for treatments (only if publicly available)",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "treatment": { "type": "string", "required": false, "description": "Treatment name to get pricing for" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Info lookups auto-execute, consultations queued for medical staff approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Send appointment reminder 24h before",
+    "Follow up 7 days post-treatment to assess results",
+    "Suggest maintenance session 3 months after treatment",
+    "Collect consent form before first visit",
+    "Re-engage dormant patients after 6 months"
+  ]
+}

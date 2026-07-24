@@ -1,0 +1,70 @@
+{
+  "vertical": "service",
+  "agent_name": "ServiceOS Agent",
+  "agent_identity": "Your Facility Manager AI. Opens tickets, dispatches techs, predicts failures.",
+  "description": "AI agent for facility management and field service — tickets, asset status, inspections, maintenance quotes",
+  "tools": [
+    {
+      "name": "create_ticket",
+      "description": "Open a support or maintenance ticket (fault, intervention, report)",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "title": { "type": "string", "required": true, "description": "Ticket title or brief description of issue" },
+        "description": { "type": "string", "required": false, "description": "Detailed description of the problem" },
+        "priority": { "type": "string", "required": false, "description": "Priority level (low, medium, high, critical)" },
+        "location": { "type": "string", "required": false, "description": "Location of the asset or issue (building, floor, room)" },
+        "name": { "type": "string", "required": true, "description": "Requester name" },
+        "phone": { "type": "string", "required": false, "description": "Requester phone number" }
+      }
+    },
+    {
+      "name": "check_asset_status",
+      "description": "Check asset status or open ticket status by ID or name",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "asset_name": { "type": "string", "required": false, "description": "Asset name or description" },
+        "asset_id": { "type": "string", "required": false, "description": "Asset or ticket ID" },
+        "location": { "type": "string", "required": false, "description": "Asset location" }
+      }
+    },
+    {
+      "name": "book_inspection",
+      "description": "Book a technical inspection or site survey",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" },
+        "address": { "type": "string", "required": true, "description": "Address for inspection" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred inspection date (YYYY-MM-DD)" }
+      }
+    },
+    {
+      "name": "request_quote",
+      "description": "Request a quote for maintenance or facility service",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "service_type": { "type": "string", "required": true, "description": "Type of maintenance or facility service" },
+        "address": { "type": "string", "required": false, "description": "Service address or site" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Asset status lookups auto-execute, tickets and bookings queued for facility manager approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Escalate high-priority tickets to facility manager within 5 minutes",
+    "Send technician ETA to requester after dispatch",
+    "Alert when preventive maintenance is due based on schedule",
+    "Close ticket automatically and request feedback when resolved",
+    "Generate weekly open tickets summary for operations manager"
+  ]
+}

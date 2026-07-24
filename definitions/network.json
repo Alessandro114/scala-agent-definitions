@@ -1,0 +1,62 @@
+{
+  "vertical": "network",
+  "agent_name": "NetworkOS Agent",
+  "agent_identity": "Your Network Coach AI. Tracks commissions, onboards members, nudges inactives.",
+  "description": "AI agent for network marketing and direct selling — compensation plans, products, lead registration, presentations",
+  "tools": [
+    {
+      "name": "get_compensation_plan",
+      "description": "Get general compensation plan information (no earnings promises)",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "rank": { "type": "string", "required": false, "description": "Distributor rank to get specific plan details for" }
+      }
+    },
+    {
+      "name": "get_products",
+      "description": "List available products by category",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "category": { "type": "string", "required": false, "description": "Product category to filter by" }
+      }
+    },
+    {
+      "name": "register_lead",
+      "description": "Register interest from a potential new distributor",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Prospect name" },
+        "phone": { "type": "string", "required": true, "description": "Prospect phone number" },
+        "city": { "type": "string", "required": false, "description": "Prospect city" },
+        "interest": { "type": "string", "required": false, "description": "Area of interest (products, business opportunity, etc.)" }
+      }
+    },
+    {
+      "name": "book_presentation",
+      "description": "Book a business plan presentation",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Prospect name" },
+        "phone": { "type": "string", "required": true, "description": "Prospect phone number" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred presentation date (YYYY-MM-DD)" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Info lookups auto-execute, lead registration and presentations queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Nudge inactive distributors after 14 days without activity",
+    "Congratulate distributors on rank advancement",
+    "Send weekly product promotion highlights to active members",
+    "Follow up with prospects who attended a presentation but did not join",
+    "Alert sponsor when downline member goes inactive"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "vertical": "praxis",
+  "agent_name": "PraxisOS Agent",
+  "agent_identity": "Your Office Manager AI. Tracks deadlines, onboards clients, drafts invoices.",
+  "description": "AI agent for law firms, accountants, and professional studios — appointments, fee estimates, team info",
+  "tools": [
+    {
+      "name": "book_appointment",
+      "description": "Book an appointment with a professional at the studio",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "matter_type": { "type": "string", "required": true, "description": "Type of matter (legal, tax, accounting, notarial, etc.)" },
+        "preferred_date": { "type": "string", "required": true, "description": "Preferred date (YYYY-MM-DD)" },
+        "preferred_time": { "type": "string", "required": false, "description": "Preferred time (HH:MM)" },
+        "name": { "type": "string", "required": true, "description": "Client name" },
+        "phone": { "type": "string", "required": false, "description": "Client phone number" }
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check a professional's calendar availability",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "date": { "type": "string", "required": true, "description": "Date to check (YYYY-MM-DD)" },
+        "time": { "type": "string", "required": false, "description": "Time to check (HH:MM)" },
+        "professional": { "type": "string", "required": false, "description": "Name or specialization of the professional" }
+      }
+    },
+    {
+      "name": "get_fee_estimate",
+      "description": "Request a fee estimate for a type of matter",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {
+        "matter_type": { "type": "string", "required": true, "description": "Type of legal or professional matter" },
+        "complexity": { "type": "string", "required": false, "description": "Complexity level (simple, standard, complex)" }
+      }
+    },
+    {
+      "name": "get_team",
+      "description": "List professionals at the studio and their specializations",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {}
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Info and availability lookups auto-execute, appointments queued for professional approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert client of upcoming deadline 7 days in advance",
+    "Send appointment reminder 24h before",
+    "Follow up on pending document submissions",
+    "Notify when a matter status changes",
+    "Request NPS survey after case closure"
+  ]
+}

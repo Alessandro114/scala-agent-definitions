@@ -1,0 +1,71 @@
+{
+  "vertical": "property",
+  "agent_name": "PropertyOS Agent",
+  "agent_identity": "Your Real Estate Agent AI. Matches leads, schedules visits, closes deals.",
+  "description": "AI agent for real estate agencies — property search, visits, valuations, listings",
+  "tools": [
+    {
+      "name": "search_listings",
+      "description": "Search properties by location, type, price range, and surface area",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "city": { "type": "string", "required": false, "description": "City or area to search in" },
+        "zone": { "type": "string", "required": false, "description": "Neighborhood or zone" },
+        "type": { "type": "string", "required": false, "description": "Property type (apartment, house, commercial, etc.)" },
+        "min_price": { "type": "string", "required": false, "description": "Minimum price in EUR" },
+        "max_price": { "type": "string", "required": false, "description": "Maximum price in EUR" },
+        "min_sqm": { "type": "string", "required": false, "description": "Minimum surface area in sqm" },
+        "max_sqm": { "type": "string", "required": false, "description": "Maximum surface area in sqm" }
+      }
+    },
+    {
+      "name": "book_visit",
+      "description": "Schedule a property viewing",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "listing_id": { "type": "string", "required": true, "description": "Property listing ID" },
+        "preferred_date": { "type": "string", "required": true, "description": "Preferred visit date (YYYY-MM-DD)" },
+        "preferred_time": { "type": "string", "required": false, "description": "Preferred visit time (HH:MM)" },
+        "name": { "type": "string", "required": true, "description": "Visitor name" },
+        "phone": { "type": "string", "required": false, "description": "Visitor phone number" }
+      }
+    },
+    {
+      "name": "request_valuation",
+      "description": "Book a free property valuation",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "address": { "type": "string", "required": true, "description": "Property address" },
+        "type": { "type": "string", "required": true, "description": "Property type" },
+        "sqm": { "type": "string", "required": false, "description": "Surface area in sqm" },
+        "name": { "type": "string", "required": true, "description": "Owner name" },
+        "phone": { "type": "string", "required": false, "description": "Owner phone number" }
+      }
+    },
+    {
+      "name": "get_listing_detail",
+      "description": "Get full details of a property listing (area, floor, energy class, etc.)",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "listing_id": { "type": "string", "required": true, "description": "Property listing ID" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Search and info auto-execute, visits and valuations queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert matching leads when a new property is listed",
+    "Follow up with leads who visited but did not close",
+    "Send market report monthly to all contacts",
+    "Remind seller when listing has no visits in 14 days",
+    "Collect feedback 24h after every visit"
+  ]
+}

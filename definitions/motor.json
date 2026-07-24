@@ -1,0 +1,85 @@
+{
+  "vertical": "motor",
+  "agent_name": "MotorOS Agent",
+  "agent_identity": "Your Service Advisor AI. Books services, tracks repairs, upsells maintenance.",
+  "description": "AI agent for car dealerships and auto repair shops — stock, quotes, test drives, service bookings, trade-in",
+  "tools": [
+    {
+      "name": "check_stock",
+      "description": "Check vehicle availability by brand, model, fuel type, and color",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "brand": { "type": "string", "required": false, "description": "Vehicle brand" },
+        "model": { "type": "string", "required": false, "description": "Vehicle model" },
+        "fuel_type": { "type": "string", "required": false, "description": "Fuel type (petrol, diesel, electric, hybrid)" },
+        "color": { "type": "string", "required": false, "description": "Preferred color" }
+      }
+    },
+    {
+      "name": "get_quote",
+      "description": "Get a vehicle quote including any active promotions",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "brand": { "type": "string", "required": true, "description": "Vehicle brand" },
+        "model": { "type": "string", "required": true, "description": "Vehicle model" },
+        "trim": { "type": "string", "required": false, "description": "Trim level or version" },
+        "trade_in": { "type": "string", "required": false, "description": "Trade-in vehicle details if applicable" }
+      }
+    },
+    {
+      "name": "book_test_drive",
+      "description": "Book a test drive",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "brand": { "type": "string", "required": true, "description": "Vehicle brand" },
+        "model": { "type": "string", "required": true, "description": "Vehicle model" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Customer name" },
+        "phone": { "type": "string", "required": false, "description": "Customer phone number" }
+      }
+    },
+    {
+      "name": "book_service",
+      "description": "Book a workshop appointment (oil change, inspection, repair)",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "service_type": { "type": "string", "required": true, "description": "Type of service (oil change, inspection, repair, etc.)" },
+        "vehicle": { "type": "string", "required": true, "description": "Vehicle description (brand, model, plate)" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Customer name" },
+        "phone": { "type": "string", "required": false, "description": "Customer phone number" }
+      }
+    },
+    {
+      "name": "get_trade_in_estimate",
+      "description": "Request a trade-in / used vehicle valuation",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "brand": { "type": "string", "required": true, "description": "Trade-in vehicle brand" },
+        "model": { "type": "string", "required": true, "description": "Trade-in vehicle model" },
+        "year": { "type": "string", "required": true, "description": "Year of manufacture" },
+        "km": { "type": "string", "required": true, "description": "Mileage in km" },
+        "name": { "type": "string", "required": true, "description": "Customer name" },
+        "phone": { "type": "string", "required": false, "description": "Customer phone number" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Stock and quote lookups auto-execute, bookings and trade-ins queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert customer when their desired vehicle is back in stock",
+    "Send service reminder based on mileage or time intervals",
+    "Follow up on test drive leads after 48h",
+    "Upsell accessories at the time of vehicle purchase",
+    "Notify when vehicle is ready for pickup after service"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "vertical": "franchise",
+  "agent_name": "FranchiseOS Agent",
+  "agent_identity": "Your Franchisor AI. Benchmarks locations, enforces compliance, calculates royalties.",
+  "description": "AI agent for franchise networks — information, franchise kits, presentations, lead registration",
+  "tools": [
+    {
+      "name": "get_franchise_info",
+      "description": "Get general franchise information (investment, royalties, support model)",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {}
+    },
+    {
+      "name": "request_franchise_kit",
+      "description": "Request the full franchise information kit",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Prospect name" },
+        "phone": { "type": "string", "required": true, "description": "Prospect phone number" },
+        "city": { "type": "string", "required": false, "description": "City where prospect wants to open" }
+      }
+    },
+    {
+      "name": "book_presentation",
+      "description": "Book a franchise plan presentation",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Prospect name" },
+        "phone": { "type": "string", "required": true, "description": "Prospect phone number" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred presentation date (YYYY-MM-DD)" }
+      }
+    },
+    {
+      "name": "register_lead",
+      "description": "Register interest in a franchise affiliation",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Prospect name" },
+        "phone": { "type": "string", "required": true, "description": "Prospect phone number" },
+        "city": { "type": "string", "required": false, "description": "Target city for the franchise" },
+        "budget": { "type": "string", "required": false, "description": "Available investment budget" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "General info auto-executes, kit requests and presentations queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Follow up with franchisee prospects 48h after kit download",
+    "Alert franchisor when a location misses KPI targets",
+    "Send monthly royalty report to each franchisee",
+    "Notify network when new location opens",
+    "Track compliance checklist completion across all locations"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "vertical": "project",
+  "agent_name": "ProjectOS Agent",
+  "agent_identity": "Your PM AI. Assigns tasks, flags risks, keeps projects on budget.",
+  "description": "AI agent for project management — status tracking, quotes, briefings",
+  "tools": [
+    {
+      "name": "get_project_status",
+      "description": "Check project progress status by ID or name",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "project_id": { "type": "string", "required": false, "description": "Project ID" },
+        "project_name": { "type": "string", "required": false, "description": "Project name" }
+      }
+    },
+    {
+      "name": "request_quote",
+      "description": "Request a quote for a new project",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "service_type": { "type": "string", "required": true, "description": "Type of project or service" },
+        "description": { "type": "string", "required": false, "description": "Project description and scope" },
+        "deadline": { "type": "string", "required": false, "description": "Desired deadline" },
+        "name": { "type": "string", "required": true, "description": "Client name" },
+        "phone": { "type": "string", "required": false, "description": "Client phone number" }
+      }
+    },
+    {
+      "name": "book_briefing",
+      "description": "Book a project briefing session",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "project_type": { "type": "string", "required": false, "description": "Type of project" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred briefing date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Client name" },
+        "phone": { "type": "string", "required": false, "description": "Client phone number" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Status lookups auto-execute, quotes and briefings queued for PM approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert PM when a task is overdue",
+    "Flag budget overrun when spend exceeds 80% of budget",
+    "Send weekly status digest to all stakeholders",
+    "Remind team members of upcoming deadlines 48h in advance",
+    "Notify client when a milestone is completed"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "vertical": "shop",
+  "agent_name": "ShopOS Agent",
+  "agent_identity": "Your Sales Associate AI. Finds products, manages stock, runs loyalty.",
+  "description": "AI agent for retail shops and e-commerce — product search, stock, reservations, wholesale quotes",
+  "tools": [
+    {
+      "name": "search_product",
+      "description": "Search products by name, category, or keyword",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "query": { "type": "string", "required": false, "description": "Search query (product name or keyword)" },
+        "category": { "type": "string", "required": false, "description": "Product category to filter by" }
+      }
+    },
+    {
+      "name": "check_stock_shop",
+      "description": "Check product availability by SKU or product name",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "product_name": { "type": "string", "required": false, "description": "Product name" },
+        "sku": { "type": "string", "required": false, "description": "Product SKU code" }
+      }
+    },
+    {
+      "name": "reserve_product",
+      "description": "Reserve a product for a customer",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "product_name": { "type": "string", "required": true, "description": "Product name" },
+        "sku": { "type": "string", "required": false, "description": "Product SKU code" },
+        "quantity": { "type": "string", "required": false, "description": "Quantity to reserve" },
+        "name": { "type": "string", "required": true, "description": "Customer name" },
+        "phone": { "type": "string", "required": false, "description": "Customer phone number" }
+      }
+    },
+    {
+      "name": "request_quote",
+      "description": "Request a quote for a custom or wholesale order",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "product_name": { "type": "string", "required": true, "description": "Product name" },
+        "quantity": { "type": "string", "required": true, "description": "Quantity required" },
+        "name": { "type": "string", "required": true, "description": "Customer name" },
+        "phone": { "type": "string", "required": false, "description": "Customer phone number" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Product search and stock checks auto-execute, reservations and quotes queued" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Notify customer when an out-of-stock product is available again",
+    "Send cart abandonment follow-up after 24h",
+    "Upsell related products after purchase",
+    "Alert staff when stock falls below threshold",
+    "Re-engage loyalty members who have not purchased in 60 days"
+  ]
+}

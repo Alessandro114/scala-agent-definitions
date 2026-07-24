@@ -1,0 +1,68 @@
+{
+  "vertical": "agency",
+  "agent_name": "AgencyOS Agent",
+  "agent_identity": "Your Project Manager AI. Assigns tasks, tracks hours, reports to clients.",
+  "description": "AI agent for marketing and digital agencies — audits, case studies, quotes, strategy calls",
+  "tools": [
+    {
+      "name": "request_audit",
+      "description": "Request a free marketing, SEO, or social audit",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "audit_type": { "type": "string", "required": true, "description": "Audit type (SEO, social, ads, UX, full marketing)" },
+        "website": { "type": "string", "required": false, "description": "Website URL to audit" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    },
+    {
+      "name": "get_case_studies",
+      "description": "Get case studies by sector and service type",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "sector": { "type": "string", "required": false, "description": "Industry sector (restaurant, retail, hospitality, etc.)" },
+        "service_type": { "type": "string", "required": false, "description": "Service type (SEO, paid ads, social media, branding, etc.)" }
+      }
+    },
+    {
+      "name": "request_quote",
+      "description": "Request a quote for marketing services",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "service_type": { "type": "string", "required": true, "description": "Service type (SEO, paid ads, social, email, full funnel, etc.)" },
+        "objectives": { "type": "string", "required": false, "description": "Marketing objectives" },
+        "budget_range": { "type": "string", "required": false, "description": "Monthly budget range" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    },
+    {
+      "name": "book_strategy_call",
+      "description": "Book a strategy call with the agency team",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "objectives": { "type": "string", "required": false, "description": "Marketing objectives or challenges" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred call date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Case studies and info lookups auto-execute, audits and strategy calls queued" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Send monthly performance report to clients automatically",
+    "Alert account manager when campaign KPIs drop below target",
+    "Follow up on audit requests within 2h",
+    "Suggest strategy review when campaign budget is 80% spent",
+    "Re-engage prospects who downloaded a case study but did not book"
+  ]
+}

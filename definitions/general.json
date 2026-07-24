@@ -1,0 +1,63 @@
+{
+  "vertical": "general",
+  "agent_name": "SCALA General Agent",
+  "agent_identity": "Your AI Employee. Answers questions, books demos, starts trials — for any business.",
+  "description": "General-purpose AI agent for SCALA platform — platform info, demo booking, trial activation, team contact",
+  "tools": [
+    {
+      "name": "get_platform_info",
+      "description": "Get certified information about SCALA AI OS (plans, features, verticals)",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {
+        "topic": { "type": "string", "required": false, "description": "Topic to get info about (pricing, features, verticals, integrations, etc.)" }
+      }
+    },
+    {
+      "name": "book_demo",
+      "description": "Book a free SCALA AI OS demo",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "sector": { "type": "string", "required": false, "description": "Business sector (restaurant, beauty, real estate, etc.)" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred demo date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    },
+    {
+      "name": "start_trial",
+      "description": "Activate a free 14-day trial on SCALA",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "plan": { "type": "string", "required": false, "description": "Plan to trial (Growth, Scale)" },
+        "email": { "type": "string", "required": true, "description": "Email address for trial account" }
+      }
+    },
+    {
+      "name": "contact_team",
+      "description": "Connect with the dedicated SCALA team",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" },
+        "message": { "type": "string", "required": false, "description": "Message or question for the team" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Platform info auto-executes, demos and trial activations queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Follow up with demo leads 24h after request",
+    "Send onboarding checklist when trial is activated",
+    "Nudge trial users who have not logged in after 3 days",
+    "Offer upgrade call 10 days into trial",
+    "Send success stories relevant to user's vertical during trial"
+  ]
+}

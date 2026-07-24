@@ -1,0 +1,66 @@
+{
+  "vertical": "studio",
+  "agent_name": "StudioOS Agent",
+  "agent_identity": "Your Site Manager AI. Tracks SAL, logs hours, alerts on deadlines.",
+  "description": "AI agent for creative and engineering studios — project quotes, briefings, portfolio, team availability",
+  "tools": [
+    {
+      "name": "request_quote",
+      "description": "Request a quote for a creative or professional service",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "service_type": { "type": "string", "required": true, "description": "Type of service (web design, branding, architecture, engineering, etc.)" },
+        "description": { "type": "string", "required": false, "description": "Project description" },
+        "deadline": { "type": "string", "required": false, "description": "Project deadline" },
+        "name": { "type": "string", "required": true, "description": "Client name" },
+        "phone": { "type": "string", "required": false, "description": "Client phone number" }
+      }
+    },
+    {
+      "name": "book_briefing",
+      "description": "Book a free briefing session",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "project_type": { "type": "string", "required": false, "description": "Type of project" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred briefing date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Client name" },
+        "phone": { "type": "string", "required": false, "description": "Client phone number" }
+      }
+    },
+    {
+      "name": "get_portfolio",
+      "description": "Request portfolio by category or sector",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "category": { "type": "string", "required": false, "description": "Portfolio category (branding, web, architecture, etc.)" },
+        "sector": { "type": "string", "required": false, "description": "Industry sector (hospitality, retail, healthcare, etc.)" }
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check team availability for a project start date",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "start_date": { "type": "string", "required": false, "description": "Desired project start date (YYYY-MM-DD)" },
+        "project_type": { "type": "string", "required": false, "description": "Type of project" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Portfolio and availability lookups auto-execute, briefings and quotes queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert project manager when milestone deadline is approaching",
+    "Send weekly project status update to client",
+    "Follow up on unanswered quotes after 72h",
+    "Request client approval when deliverable is ready",
+    "Notify team when new project is assigned"
+  ]
+}

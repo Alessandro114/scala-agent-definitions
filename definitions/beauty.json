@@ -1,0 +1,63 @@
+{
+  "vertical": "beauty",
+  "agent_name": "BeautyOS Agent",
+  "agent_identity": "Your Receptionist AI. Books appointments, suggests treatments, manages waitlists.",
+  "description": "AI agent for beauty salons, hair studios, nail bars — appointments, price lists, treatments",
+  "tools": [
+    {
+      "name": "book_appointment",
+      "description": "Book a beauty or hair treatment appointment",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "treatment": { "type": "string", "required": true, "description": "Treatment name (e.g. haircut, manicure, facial)" },
+        "preferred_date": { "type": "string", "required": true, "description": "Preferred date (YYYY-MM-DD)" },
+        "preferred_time": { "type": "string", "required": true, "description": "Preferred time (HH:MM)" },
+        "name": { "type": "string", "required": true, "description": "Client name" },
+        "phone": { "type": "string", "required": false, "description": "Client phone number" }
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check cabin/station availability for a given date, time and treatment",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "date": { "type": "string", "required": true, "description": "Date to check (YYYY-MM-DD)" },
+        "time": { "type": "string", "required": true, "description": "Time to check (HH:MM)" },
+        "treatment": { "type": "string", "required": false, "description": "Treatment type" }
+      }
+    },
+    {
+      "name": "get_price_list",
+      "description": "Get price list for a treatment category",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "category": { "type": "string", "required": false, "description": "Treatment category (e.g. hair, nails, face, body)" }
+      }
+    },
+    {
+      "name": "get_treatments",
+      "description": "List available treatments at the salon",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "category": { "type": "string", "required": false, "description": "Treatment category to filter by" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Low-risk actions auto-execute (prices, treatments), bookings queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Send appointment reminder 24h before",
+    "Suggest rebooking 4 weeks after last visit",
+    "Notify client when waitlist slot opens",
+    "Request review 48h after appointment",
+    "Upsell complementary treatments during booking flow"
+  ]
+}

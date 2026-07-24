@@ -1,0 +1,64 @@
+{
+  "vertical": "dine",
+  "agent_name": "DineOS Agent",
+  "agent_identity": "Your Maitre AI. Books tables, kills no-shows, handles reviews.",
+  "description": "AI agent for restaurant management — reservations, menu, allergens, loyalty",
+  "tools": [
+    {
+      "name": "book_table",
+      "description": "Book a table at the restaurant",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "date": { "type": "string", "required": true, "description": "Reservation date (YYYY-MM-DD)" },
+        "time": { "type": "string", "required": true, "description": "Reservation time (HH:MM)" },
+        "guests": { "type": "string", "required": true, "description": "Number of guests" },
+        "name": { "type": "string", "required": true, "description": "Guest name" },
+        "phone": { "type": "string", "required": false, "description": "Guest phone number" },
+        "notes": { "type": "string", "required": false, "description": "Special requests or dietary needs" }
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check table availability for a given date, time and party size",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "date": { "type": "string", "required": true, "description": "Date to check (YYYY-MM-DD)" },
+        "time": { "type": "string", "required": true, "description": "Time to check (HH:MM)" },
+        "guests": { "type": "string", "required": true, "description": "Number of guests" }
+      }
+    },
+    {
+      "name": "get_menu",
+      "description": "Get current menu or filter by category (starters, mains, desserts, etc.)",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "category": { "type": "string", "required": false, "description": "Menu category (e.g. starters, mains, desserts, drinks)" }
+      }
+    },
+    {
+      "name": "get_allergens",
+      "description": "Check allergen information for a specific dish",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "dish_name": { "type": "string", "required": true, "description": "Name of the dish to check" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Low-risk actions auto-execute (menu, availability), medium+ queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Send reservation reminder 24h before",
+    "Detect no-shows and update status automatically",
+    "Re-engage customers inactive 30+ days",
+    "Request review 24h after completed reservation",
+    "Alert owner when capacity exceeds 80%"
+  ]
+}

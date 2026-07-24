@@ -1,0 +1,81 @@
+{
+  "vertical": "landiq",
+  "agent_name": "LandIQ Agent",
+  "agent_identity": "Your Urban Analyst AI. Calculates volumetrics, runs DCF, generates feasibility.",
+  "description": "AI agent for real estate investment and land development — feasibility analysis, OMI valuations, urban constraints, auctions",
+  "tools": [
+    {
+      "name": "start_feasibility_analysis",
+      "description": "Start a LandIQ feasibility analysis for a plot or property",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "address": { "type": "string", "required": true, "description": "Property or land address" },
+        "city": { "type": "string", "required": true, "description": "City" },
+        "sqm": { "type": "string", "required": false, "description": "Surface area in sqm" },
+        "asking_price": { "type": "string", "required": false, "description": "Asking price in EUR" },
+        "target_use": { "type": "string", "required": false, "description": "Intended use (residential, commercial, mixed-use, etc.)" }
+      }
+    },
+    {
+      "name": "get_omi_values",
+      "description": "Retrieve OMI (Italian land registry) market values for a zone and cadastral category",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {
+        "city": { "type": "string", "required": true, "description": "City to look up OMI values for" },
+        "zone_omi": { "type": "string", "required": false, "description": "OMI zone code" },
+        "category": { "type": "string", "required": false, "description": "Cadastral category (A2, B1, C1, etc.)" }
+      }
+    },
+    {
+      "name": "check_urban_constraints",
+      "description": "Check urban planning constraints (PRG, PAI, SITAP) for an address",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {
+        "address": { "type": "string", "required": true, "description": "Property address" },
+        "city": { "type": "string", "required": true, "description": "City" },
+        "province": { "type": "string", "required": false, "description": "Province code" }
+      }
+    },
+    {
+      "name": "search_auctions",
+      "description": "Search judicial real estate auctions (PVP) by zone and budget",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {
+        "city": { "type": "string", "required": false, "description": "City to search auctions in" },
+        "province": { "type": "string", "required": false, "description": "Province to search in" },
+        "max_price": { "type": "string", "required": false, "description": "Maximum auction price in EUR" },
+        "property_type": { "type": "string", "required": false, "description": "Property type (residential, commercial, land, etc.)" }
+      }
+    },
+    {
+      "name": "collect_investment_interest",
+      "description": "Capture investor interest and route to LandIQ consultant",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Investor name" },
+        "phone": { "type": "string", "required": true, "description": "Investor phone number" },
+        "budget": { "type": "string", "required": false, "description": "Investment budget in EUR" },
+        "target_zone": { "type": "string", "required": false, "description": "Target investment zone" },
+        "investment_type": { "type": "string", "required": false, "description": "Investment type (buy-to-rent, development, land, auction, etc.)" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "OMI lookups, constraints and auction searches auto-execute, feasibility and lead capture queued" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert investor when a matching auction is listed",
+    "Send feasibility report summary within 24h of request",
+    "Notify when urban plan (PRG) is updated in monitored zones",
+    "Follow up with investor leads after 48h",
+    "Monthly market value update for monitored areas"
+  ]
+}

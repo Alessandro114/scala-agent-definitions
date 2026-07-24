@@ -1,0 +1,65 @@
+{
+  "vertical": "wellness",
+  "agent_name": "WellnessOS Agent",
+  "agent_identity": "Your Fitness Manager AI. Books classes, manages memberships, tracks check-ins.",
+  "description": "AI agent for gyms, yoga studios, pilates, and wellness centers — class schedules, bookings, memberships",
+  "tools": [
+    {
+      "name": "check_schedule",
+      "description": "View class/session schedule by day or class type",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "class_name": { "type": "string", "required": false, "description": "Class name (yoga, pilates, spinning, etc.)" },
+        "day": { "type": "string", "required": false, "description": "Day of the week (monday, tuesday, etc.)" }
+      }
+    },
+    {
+      "name": "book_class",
+      "description": "Book a class or training session",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "class_name": { "type": "string", "required": true, "description": "Class or session name" },
+        "date": { "type": "string", "required": true, "description": "Class date (YYYY-MM-DD)" },
+        "time": { "type": "string", "required": false, "description": "Class time (HH:MM)" },
+        "name": { "type": "string", "required": true, "description": "Member name" },
+        "phone": { "type": "string", "required": false, "description": "Member phone number" }
+      }
+    },
+    {
+      "name": "check_membership",
+      "description": "Check membership status and expiry for a phone number",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "phone": { "type": "string", "required": true, "description": "Member phone number" }
+      }
+    },
+    {
+      "name": "book_consultation",
+      "description": "Book a consultation with a trainer or nutritionist",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Member name" },
+        "phone": { "type": "string", "required": false, "description": "Member phone number" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred date (YYYY-MM-DD)" },
+        "notes": { "type": "string", "required": false, "description": "Goals or specific requests" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Schedule and membership checks auto-execute, class bookings queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert member 7 days before membership expiry",
+    "Send class reminder 2h before booked session",
+    "Re-engage members who have not checked in for 14 days",
+    "Suggest personal training after 10 group class bookings",
+    "Celebrate milestones (100 check-ins, 1 year membership)"
+  ]
+}

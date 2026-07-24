@@ -1,0 +1,65 @@
+{
+  "vertical": "clean",
+  "agent_name": "CleanOS Agent",
+  "agent_identity": "Your Dispatcher AI. Assigns teams, tracks quality, enforces SLA.",
+  "description": "AI agent for professional cleaning companies — quotes, scheduling, certifications, inspections",
+  "tools": [
+    {
+      "name": "request_quote",
+      "description": "Request a cleaning service quote",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "service_type": { "type": "string", "required": true, "description": "Type of cleaning service (office, industrial, residential, post-construction, etc.)" },
+        "address": { "type": "string", "required": true, "description": "Service address" },
+        "surface_sqm": { "type": "string", "required": false, "description": "Surface area in sqm" },
+        "frequency": { "type": "string", "required": false, "description": "Service frequency (one-time, weekly, monthly, etc.)" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check team availability for a given date and service type",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "date": { "type": "string", "required": true, "description": "Desired date (YYYY-MM-DD)" },
+        "service_type": { "type": "string", "required": true, "description": "Type of cleaning service" },
+        "address": { "type": "string", "required": false, "description": "Service address" }
+      }
+    },
+    {
+      "name": "get_certifications",
+      "description": "List company certifications (ISO 9001, ISO 14001, HACCP, etc.)",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {}
+    },
+    {
+      "name": "book_inspection",
+      "description": "Book a free on-site inspection for a quote",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" },
+        "address": { "type": "string", "required": true, "description": "Property address for inspection" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred inspection date (YYYY-MM-DD)" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Availability and certification lookups auto-execute, quotes and bookings queued" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Follow up on open quotes after 48h of no response",
+    "Remind clients of scheduled service 24h before",
+    "Alert manager if SLA deadline is at risk",
+    "Request quality feedback after every completed job",
+    "Renew recurring contracts 30 days before expiry"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "vertical": "reputation",
+  "agent_name": "ReputationOS Agent",
+  "agent_identity": "Your PR Manager AI. Monitors reviews, responds fast, protects your brand.",
+  "description": "AI agent for online reputation management — brand reports, audits, strategy calls",
+  "tools": [
+    {
+      "name": "get_reputation_report",
+      "description": "Request an online reputation report for a brand",
+      "risk_level": "low",
+      "requires_db": false,
+      "params": {
+        "brand": { "type": "string", "required": true, "description": "Brand or business name to analyze" }
+      }
+    },
+    {
+      "name": "request_reputation_audit",
+      "description": "Book a free reputation audit",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "brand": { "type": "string", "required": true, "description": "Brand or business name" },
+        "website": { "type": "string", "required": false, "description": "Brand website URL" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    },
+    {
+      "name": "book_strategy_call",
+      "description": "Book a strategy call for a reputation management plan",
+      "risk_level": "medium",
+      "requires_db": false,
+      "params": {
+        "objectives": { "type": "string", "required": false, "description": "Reputation goals or current issues" },
+        "preferred_date": { "type": "string", "required": false, "description": "Preferred call date (YYYY-MM-DD)" },
+        "name": { "type": "string", "required": true, "description": "Contact name" },
+        "phone": { "type": "string", "required": false, "description": "Contact phone number" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Report lookups auto-execute, audits and strategy calls queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute except high/critical risk" }
+  },
+  "proactive_behaviors": [
+    "Alert brand owner immediately when a 1-star review is detected",
+    "Draft response to negative reviews within 15 minutes",
+    "Send weekly sentiment dashboard to client",
+    "Track competitor review trends monthly",
+    "Trigger review request campaign after positive interactions"
+  ]
+}
