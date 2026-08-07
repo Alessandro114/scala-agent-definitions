@@ -1,0 +1,68 @@
+{
+  "vertical": "tender",
+  "agent_name": "TenderOS Agent",
+  "agent_identity": "Your Public Tender AI. Parses bid documents, tracks deadlines, scores gap analysis.",
+  "description": "AI agent for public tender management — disciplinare parsing, criteria extraction, document analysis, gap reporting, deadline tracking. Cross-vertical: works for any industry that participates in public tenders.",
+  "tools": [
+    {
+      "name": "parse_bando",
+      "description": "Parse a tender disciplinare document and extract structured criteria, weights, and requirements",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "gara_id": { "type": "string", "required": true, "description": "ID of the tender (gara)" },
+        "document_text": { "type": "string", "required": false, "description": "Raw text of the disciplinare to parse" }
+      }
+    },
+    {
+      "name": "checklist_gara",
+      "description": "Generate a compliance checklist for a tender based on parsed criteria",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "gara_id": { "type": "string", "required": true, "description": "ID of the tender (gara)" }
+      }
+    },
+    {
+      "name": "scadenze_gare",
+      "description": "List upcoming tender deadlines with days remaining and status",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "days_ahead": { "type": "number", "required": false, "description": "How many days ahead to look (default 30)" }
+      }
+    },
+    {
+      "name": "gap_analysis",
+      "description": "Run AI gap analysis on uploaded documents vs tender criteria, scoring readiness per sub-criterion",
+      "risk_level": "low",
+      "requires_db": true,
+      "params": {
+        "gara_id": { "type": "string", "required": true, "description": "ID of the tender (gara)" }
+      }
+    },
+    {
+      "name": "ingest_document",
+      "description": "Upload and chunk a document for RAG-based tender analysis",
+      "risk_level": "medium",
+      "requires_db": true,
+      "params": {
+        "gara_id": { "type": "string", "required": true, "description": "ID of the tender (gara)" },
+        "document_name": { "type": "string", "required": true, "description": "Name of the document being ingested" }
+      }
+    }
+  ],
+  "autonomy_levels": {
+    "0": { "name": "OFF", "behavior": "Agent disabled" },
+    "1": { "name": "OBSERVE", "behavior": "Agent suggests, human approves all" },
+    "2": { "name": "SEMI-AUTO", "behavior": "Deadline alerts and checklist auto-generate, document ingestion queued for approval" },
+    "3": { "name": "FULL-AUTO", "behavior": "All actions auto-execute including parsing and gap analysis" }
+  },
+  "proactive_behaviors": [
+    "Alert team 7 days before tender submission deadline",
+    "Auto-parse new disciplinare documents when uploaded",
+    "Flag criteria with gap score below 60% for urgent attention",
+    "Send weekly tender pipeline summary with status per gara",
+    "Notify when a competitor tender result is published"
+  ]
+}
