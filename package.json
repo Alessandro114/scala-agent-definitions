@@ -1,5 +1,5 @@
 {
-  "name": "@scala-ai/agent-definitions",
+  "name": "scala-agent-definitions",
   "version": "1.0.0",
   "description": "Open-source AI agent definitions for 20 business verticals. Define what your AI agent can do — booking, CRM, inventory, reviews, and more.",
   "main": "dist/index.js",
@@ -23,10 +23,13 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run --coverage"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^2.1.0",
+    "@vitest/coverage-v8": "^2.1.0"
   }
 }

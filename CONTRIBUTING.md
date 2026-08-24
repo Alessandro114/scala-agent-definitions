@@ -1,4 +1,4 @@
-# Contributing to @scala-ai/agent-definitions
+# Contributing to scala-agent-definitions
 
 Thank you for contributing. This package is the open-source tool schema layer for the [SCALA AI OS](https://get-scala.com) platform.
 

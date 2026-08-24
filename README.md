@@ -1,6 +1,6 @@
-# @scala-ai/agent-definitions
+# scala-agent-definitions
 
-![License](https://img.shields.io/badge/license-Apache%202.0-blue) ![Verticals](https://img.shields.io/badge/verticals-20-green) ![Tools](https://img.shields.io/badge/tools-79-orange)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue) ![Verticals](https://img.shields.io/badge/verticals-20-green) ![Tools](https://img.shields.io/badge/tools-80-orange)
 
 **Open-source AI agent definitions for 20 business verticals.**
 
@@ -27,7 +27,7 @@ This package gives you all of that, pre-built, for 20 business verticals. Ready 
 ## Install
 
 ```bash
-npm install @scala-ai/agent-definitions
+npm install scala-agent-definitions
 ```
 
 No dependencies. Reads JSON files from disk.
@@ -52,7 +52,7 @@ node examples/node-restaurant-agent.js
 
 ```typescript
 import OpenAI from 'openai';
-import { getToolsForVertical, buildAgentSystemPrompt } from '@scala-ai/agent-definitions';
+import { getToolsForVertical, buildAgentSystemPrompt } from 'scala-agent-definitions';
 
 const client = new OpenAI();
 
@@ -74,7 +74,7 @@ console.log(response.choices[0].message.tool_calls);
 
 ```typescript
 import Groq from 'groq-sdk';
-import { getToolsForVertical } from '@scala-ai/agent-definitions';
+import { getToolsForVertical } from 'scala-agent-definitions';
 
 const groq = new Groq();
 
@@ -88,7 +88,7 @@ const response = await groq.chat.completions.create({
 ### Get only safe tools for auto-execution
 
 ```typescript
-import { getToolsByRisk } from '@scala-ai/agent-definitions';
+import { getToolsByRisk } from 'scala-agent-definitions';
 
 // Low-risk only: check availability, get menu, get allergens
 // These are safe to execute without human approval
@@ -102,7 +102,7 @@ const actionTools = getToolsByRisk('dine', 'medium');
 ### Get agent identity and proactive behaviors
 
 ```typescript
-import { getVerticalDefinition, getProactiveBehaviors } from '@scala-ai/agent-definitions';
+import { getVerticalDefinition, getProactiveBehaviors } from 'scala-agent-definitions';
 
 const agent = getVerticalDefinition('beauty');
 console.log(agent?.agent_identity);
@@ -219,7 +219,7 @@ Visit [get-scala.com](https://get-scala.com) — 14-day free trial, no credit ca
 
 ## Why Not LangChain / CrewAI / AutoGen?
 
-| | @scala-ai/agent-definitions | LangChain | CrewAI | AutoGen |
+| | scala-agent-definitions | LangChain | CrewAI | AutoGen |
 |---|---|---|---|---|
 | **Scope** | Vertical-specific (restaurants, beauty, real estate, …) | Generic framework | Generic multi-agent | Generic multi-agent |
 | **Tool schema** | Pre-built, production-tested per vertical | Build your own | Build your own | Build your own |
@@ -283,7 +283,7 @@ Part of the **S.C.A.L.A.** open-source ecosystem:
 | [SARA](https://github.com/Alessandro114/sara) | WhatsApp AI agent with 20 industry-specific brains |
 | [LandIQ](https://github.com/Alessandro114/landiq) | Autonomous real estate feasibility agent |
 | [scala-sites](https://github.com/Alessandro114/scala-sites) | 100 vertical website templates (Next.js, MIT) |
-| [scala-agent-definitions](https://github.com/Alessandro114/scala-agent-definitions) | 79 AI tool definitions for 20 verticals |
+| [scala-agent-definitions](https://github.com/Alessandro114/scala-agent-definitions) | 80 AI tool definitions for 20 verticals |
 | [scala-mcp-server](https://github.com/Alessandro114/scala-mcp-server) | MCP server for Claude/ChatGPT — 250M+ companies |
 | [Score SDKs](https://github.com/Alessandro114/scala-score-js) | Company data — [JS](https://npmjs.com/package/scala-score) · [Python](https://pypi.org/project/scala-score) · [Go](https://github.com/Alessandro114/company-lookup-go) · [Rust](https://github.com/Alessandro114/score-rust) · [Deno](https://github.com/Alessandro114/scala-score-deno) |
 | [enrich-companies](https://github.com/Alessandro114/enrich-companies) | CSV enrichment CLI — [npm](https://npmjs.com/package/enrich-companies) · [pip](https://pypi.org/project/enrich-companies) |

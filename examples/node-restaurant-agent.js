@@ -2,7 +2,7 @@
  * node-restaurant-agent.js
  *
  * Complete runnable example: DineOS restaurant booking agent
- * Uses Groq (free tier) + @scala-ai/agent-definitions tool schema
+ * Uses Groq (free tier) + scala-agent-definitions tool schema
  *
  * Usage:
  *   GROQ_API_KEY=your_key_here node examples/node-restaurant-agent.js
@@ -17,7 +17,7 @@ const path = require('path');
 
 // ─── Step 1: Load the DineOS tool definitions ─────────────────────────────────
 // The JSON file contains the canonical schema for all DineOS tools.
-// In production you'd use: require('@scala-ai/agent-definitions').getToolsForVertical('dine')
+// In production you'd use: require('scala-agent-definitions').getToolsForVertical('dine')
 const dineDefinition = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../definitions/dine.json'), 'utf-8')
 );

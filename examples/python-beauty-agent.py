@@ -2,7 +2,7 @@
 python-beauty-agent.py
 
 Complete runnable example: BeautyOS appointment booking agent
-Uses Groq (free tier) + @scala-ai/agent-definitions tool schema
+Uses Groq (free tier) + scala-agent-definitions tool schema
 
 Usage:
     GROQ_API_KEY=your_key_here python3 examples/python-beauty-agent.py

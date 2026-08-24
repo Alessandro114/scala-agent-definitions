@@ -1,5 +1,5 @@
 /**
- * @scala-ai/agent-definitions
+ * scala-agent-definitions
  * Open-source AI agent definitions for 20 business verticals.
  * Apache-2.0 License — https://github.com/Alessandro114/scala-agent-definitions
  */
