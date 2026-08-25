@@ -1,6 +1,7 @@
 # scala-agent-definitions
 
 ![License](https://img.shields.io/badge/license-Apache%202.0-blue) ![Verticals](https://img.shields.io/badge/verticals-20-green) ![Tools](https://img.shields.io/badge/tools-80-orange)
+[![CI](https://github.com/Alessandro114/scala-agent-definitions/actions/workflows/ci.yml/badge.svg)](https://github.com/Alessandro114/scala-agent-definitions/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Alessandro114/scala-agent-definitions/actions/workflows/ci.yml)
 
 **Open-source AI agent definitions for 20 business verticals.**
 
