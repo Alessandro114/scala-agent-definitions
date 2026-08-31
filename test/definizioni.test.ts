@@ -1,7 +1,7 @@
-// I 21 file JSON sono il prodotto: il codice e solo il modo di leggerli.
-// Un errore qui non da un'eccezione — da a un LLM uno strumento malformato,
-// che e il tipo di guasto che si manifesta come "l'agente si comporta in modo
-// strano" e che nessuno riesce a riprodurre.
+// The 21 JSON files are the product: the code is just the way to read them.
+// An error here doesn't throw an exception — it gives an LLM a malformed tool,
+// which is the kind of failure that shows up as "the agent is behaving
+// strangely" and that nobody can reproduce.
 
 import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
@@ -18,8 +18,8 @@ const DEFINIZIONI = FILE.map(f => ({
     dati: JSON.parse(readFileSync(join(CARTELLA, f), 'utf8')),
 }));
 
-// `general` e il ripiego, non un verticale vendibile: i conteggi pubblici lo
-// escludono, ed e cosi che il badge dichiara 20 su 21 file.
+// `general` is the fallback, not a sellable vertical: public counts exclude
+// it, which is why the badge reports 20 out of 21 files.
 const VERTICALI = DEFINIZIONI.filter(d => d.chiave !== 'general');
 
 const RISCHI = ['low', 'medium', 'high', 'critical'];
@@ -44,9 +44,9 @@ describe('ogni definizione e ben formata', () => {
         expect(Array.isArray(dati.tools), file).toBe(true);
     });
 
-    // Il caricatore indicizza per `vertical`, non per nome file: se i due
-    // divergono, getVerticalDefinition('dine') non trova dine.json e
-    // l'errore e silenzioso — restituisce undefined, non solleva.
+    // The loader indexes by `vertical`, not by file name: if the two
+    // diverge, getVerticalDefinition('dine') won't find dine.json and
+    // the error is silent — it returns undefined, it doesn't throw.
     it.each(DEFINIZIONI)('$file: la chiave vertical corrisponde al nome del file', ({ dati, chiave, file }) => {
         expect(dati.vertical, file).toBe(chiave);
     });
@@ -83,9 +83,9 @@ describe('gli strumenti', () => {
         expect(doppi, file).toEqual([]);
     });
 
-    // Il parametro finisce dritto nello schema che si manda all'LLM: un `type`
-    // sbagliato lo fa rifiutare dall'API, e un `required` non booleano
-    // finisce silenziosamente fra i campi facoltativi.
+    // The parameter goes straight into the schema sent to the LLM: a wrong
+    // `type` gets it rejected by the API, and a non-boolean `required`
+    // silently ends up among the optional fields.
     it.each(DEFINIZIONI)('$file: ogni parametro ha type, description e required booleano', ({ dati, file }) => {
         for (const t of dati.tools) {
             for (const [nome, p] of Object.entries(t.params as Record<string, {
@@ -126,8 +126,8 @@ describe('livelli di autonomia e comportamenti proattivi', () => {
 });
 
 describe('il README dice la verita sui numeri', () => {
-    // Il badge diceva 79 strumenti quando ne esistevano 84. Nessuno se ne
-    // accorge finche non lo conta, e chi legge il repo si fida.
+    // The badge said 79 tools when 84 actually existed. Nobody notices
+    // until someone counts them, and readers of the repo trust it.
     const readme = readFileSync(join(RADICE, 'README.md'), 'utf8');
 
     it('il numero di verticali nel badge corrisponde ai file, escluso general', () => {
@@ -148,9 +148,9 @@ describe('e lo dice anche fuori dai badge', () => {
     const readme = readFileSync(join(RADICE, 'README.md'), 'utf8');
     const reali = VERTICALI.reduce((n, d) => n + d.dati.tools.length, 0);
 
-    // Il numero compariva due volte: nel badge e nella tabella dei repo in
-    // fondo. Correggere solo il badge lascia la seconda bugia in piedi, ed e
-    // quella che legge chi arriva in fondo alla pagina, cioe chi e interessato.
+    // The number appeared twice: in the badge and in the repo table at the
+    // bottom. Fixing only the badge leaves the second lie standing, and it's
+    // the one read by whoever scrolls to the bottom of the page — the interested reader.
     it('ogni "N tool definitions" nel testo riporta il numero vero', () => {
         const citazioni = [...readme.matchAll(/(\d+)\s+(?:AI\s+)?tool definitions/gi)].map(m => Number(m[1]));
         expect(citazioni.length, 'nessuna citazione trovata: il README e cambiato forma').toBeGreaterThan(0);

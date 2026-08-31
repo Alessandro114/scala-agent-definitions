@@ -1,6 +1,6 @@
-// L'API pubblica del pacchetto. Ogni funzione qui e una promessa fatta a chi
-// lo installa da npm: cambiarne il comportamento rompe codice altrui, ed e per
-// questo che vanno bloccate con dei test e non solo documentate.
+// The package's public API. Every function here is a promise made to whoever
+// installs it from npm: changing its behavior breaks someone else's code, which is
+// why it must be locked down with tests and not just documented.
 
 import { describe, it, expect } from 'vitest';
 import {
@@ -101,8 +101,8 @@ describe('getToolsForVertical', () => {
     });
 
     it('non trascina risk_level e requires_db nello schema mandato all LLM', () => {
-        // Sono metadati nostri: passarli all'API la fa rispondere con un errore
-        // di schema, oppure - peggio - il modello li legge come parametri.
+        // These are our own metadata: passing them to the API makes it respond
+        // with a schema error, or - worse - the model reads them as parameters.
         for (const t of getToolsForVertical('dine')) {
             for (const p of Object.values(t.function.parameters.properties)) {
                 expect(Object.keys(p).sort()).toEqual(['description', 'type']);

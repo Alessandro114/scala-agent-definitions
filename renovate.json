@@ -7,19 +7,19 @@
   "prConcurrentLimit": 5,
   "packageRules": [
     {
-      "description": "patch e minor: raggruppati in una PR sola e automerge SE la CI passa.",
+      "description": "patch and minor: grouped into a single PR and automerge IF CI passes.",
       "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "aggiornamenti minori",
+      "groupName": "minor updates",
       "automerge": true
     },
     {
-      "description": "major: sempre revisione manuale, mai automerge.",
+      "description": "major: always manual review, never automerge.",
       "matchUpdateTypes": ["major"],
-      "groupName": "aggiornamenti major (revisione)",
+      "groupName": "major updates (review)",
       "automerge": false
     },
     {
-      "description": "Node runtime: NON bumpare qui. La migrazione 20->22 e coordinata col runtime di produzione, non va fatta sul solo CI. Vedi memoria project-aggiornamenti-piano.",
+      "description": "Node runtime: do NOT bump here. The 20->22 migration is coordinated with the production runtime, and must not be done from CI alone. See memory project-aggiornamenti-piano.",
       "matchDepNames": ["node"],
       "enabled": false
     }

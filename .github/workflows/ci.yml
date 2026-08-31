@@ -4,14 +4,14 @@ on:
   pull_request:
 
 jobs:
-  prova:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
-      # npm ci e non npm install: un package-lock disallineato deve fallire
-      # qui, non per chi installa il pacchetto da npm.
+      # npm ci and not npm install: a mismatched package-lock must fail
+      # here, not for whoever installs the package from npm.
       - run: npm ci
       - run: npm run build
       - run: npm test
