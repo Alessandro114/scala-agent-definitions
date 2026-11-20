@@ -281,7 +281,7 @@ Part of the **S.C.A.L.A.** open-source ecosystem:
 
 | Project | What it does |
 |---------|-------------|
-| [SARA](https://github.com/Alessandro114/sara) | WhatsApp AI agent with 20 industry-specific brains |
+| [SARA](https://github.com/Alessandro114/sara) | WhatsApp AI agent — 20 verticals defined, 13 brains included |
 | [LandIQ](https://github.com/Alessandro114/landiq) | Autonomous real estate feasibility agent |
 | [scala-sites](https://github.com/Alessandro114/scala-sites) | 100 vertical website templates (Next.js, MIT) |
 | [scala-agent-definitions](https://github.com/Alessandro114/scala-agent-definitions) | 80 AI tool definitions for 20 verticals |
